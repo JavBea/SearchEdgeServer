@@ -107,7 +107,6 @@ def __single_request(query, model="gpt-4o", messages=None, functions=None):
     return response_message
 
 
-
 if __name__ == '__main__':
     # res = __single_request("What is pycharm")
     # print(res)
@@ -117,5 +116,7 @@ if __name__ == '__main__':
     print(res2)
 
     from app.config.functions import functions as declarations
-    res2 = query_service("Who won the 2024 US presidential election", model="gpt-4o", messages=None, functions=declarations, func_on=True)
-    print("RAG response: "+res2)
+
+    res2 = query_service("Who won the 2024 US presidential election", model="gpt-4o", messages=None,
+                         functions=declarations, func_on=True)
+    print("RAG response: " + res2)
