@@ -1,5 +1,5 @@
 from flask import Flask
-from app.blueprints.llm_bp import llm_bp
+from src.blueprints.llm_bp import llm_bp
 
 app = Flask(__name__)
 

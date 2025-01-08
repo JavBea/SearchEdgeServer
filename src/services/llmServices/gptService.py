@@ -7,7 +7,7 @@ import json
 
 from openai import OpenAI
 
-from app.services.searchServices.googleService import google_search
+from src.services.searchServices.googleService import google_search
 
 # 创建 OpenAI 客户端实例，并通过 API 密钥进行身份验证。
 client = OpenAI(
@@ -115,7 +115,7 @@ if __name__ == '__main__':
     res2 = query_service("Who won the 2024 US presidential election")
     print(res2)
 
-    from app.config.functions import functions as declarations
+    from src.config.functions import functions as declarations
 
     res2 = query_service("Who won the 2024 US presidential election", model="gpt-4o", messages=None,
                          functions=declarations, func_on=True)

@@ -6,8 +6,8 @@
 from flask import request
 import flask
 
-from app.services import llmService
-from app.utils.json_generator.llm_response_json import LlmResponseJson
+from src.services import llmService
+from src.utils.json_generator.llm_response_json import LlmResponseJson
 
 # 实例化蓝图对象“llm”
 llm_bp = flask.Blueprint('llm_module', __name__)
@@ -15,8 +15,9 @@ llm_bp = flask.Blueprint('llm_module', __name__)
 
 @llm_bp.route('/query', methods=['POST'])
 def query_route():
-    # 获取请求的各个字段
+    # 获取请求
     data = request.get_json()
+    # 获取请求的各个字段
     query = data['query']
     func_on = data['func_on']
     llm = data['llm']

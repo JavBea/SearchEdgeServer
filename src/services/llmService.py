@@ -5,6 +5,9 @@
 # @Author    :Shao YiHan
 import json
 
+from src.services.llmServices.gptService import query_service as gpt_query
+from src.services.llmServices.gptService import query_service as qwen_query
+
 
 def llm_query_service(query, llm="chatgpt", model=None, messages=None, functions=None, func_on=True):
     """
@@ -18,18 +21,15 @@ def llm_query_service(query, llm="chatgpt", model=None, messages=None, functions
     :return : (str) 得到的回答
     """
 
-    # 选择大模型，并引入相关函数
-    if llm == "chatgpt":
-        from llmServices.gptService import query_service
+    # 选择大模型，并调用相关函数
+    if llm == "qwen":
+        return qwen_query(query, model, messages, functions, func_on)
     else:
-        from llmServices.qwenService import query_service
-
-    # 返回结果
-    return query_service(query, model, messages, functions, func_on)
+        return gpt_query(query, model, messages, functions, func_on)
 
 
 if __name__ == '__main__':
-    from app.config.functions import functions as declarations
+    from src.config.functions import functions as declarations
 
     res2 = llm_query_service("Who won the 2024 US presidential election", model="gpt-4o", messages=None,
                              functions=declarations, func_on=True)
