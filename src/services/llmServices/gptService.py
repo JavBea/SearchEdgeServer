@@ -30,6 +30,10 @@ def query_service(query, model="gpt-4o", messages=None, functions=None, func_on=
     :return : (str) 得到的String格式回复
     """
 
+    # 默认模型为"gpt-4o"
+    if model is None:
+        model = "gpt-4o"
+
     # 如果关闭了函数调用
     if (not func_on) or (functions is None):
         # 将函数说明置空，不允许访问进行函数调用，直接返回结果
@@ -50,7 +54,7 @@ def query_service(query, model="gpt-4o", messages=None, functions=None, func_on=
         if function_name == "google_search":
             # 调用Google API进行调用
             result = google_search(query=arguments["query"], num_results=arguments.get("num_results", 3))
-            # print(result)
+            print(result)
             # 将结果返回给大模型
             messages = [
                 {"role": "user", "content": query},
@@ -115,7 +119,7 @@ if __name__ == '__main__':
     res2 = query_service("Who won the 2024 US presidential election")
     print(res2)
 
-    from src.config.functions import functions as declarations
+    from src.config.functions import gpt_functions as declarations
 
     res2 = query_service("Who won the 2024 US presidential election", model="gpt-4o", messages=None,
                          functions=declarations, func_on=True)
