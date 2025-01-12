@@ -5,18 +5,13 @@
 # @Author    :Shao YiHan
 import json
 
-from openai import OpenAI
-
 from src.services.searchServices.googleService import google_search
 
 # 创建 OpenAI 客户端实例，并通过 API 密钥进行身份验证。
-client = OpenAI(
-    api_key="sk-proj-SJs7fGB8AodjABytoV-lUw_aLav8"
-            "_cMvRC9j5cGJ80b0NyOdSR0X07K2t6gn_cd2"
-            "Ie7c1s0IWXT3BlbkFJq5_h667EgVO9TwXet3"
-            "7_ppGZmMIM3Rsj_JpLnFMK2H1-t0fHcsEBds"
-            "EB9NDfiY9eDC-SreVEEA"
-)
+# client = OpenAI(
+#     api_key=API_KEY
+# )
+client = None
 
 
 def query_service(query, model="gpt-4o", messages=None, functions=None, func_on=True):

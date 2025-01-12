@@ -3,26 +3,20 @@
 # @FileName  :googleService.py
 # @Time      :2025/1/8 10:34
 # @Author    :Shao YiHan
-from openai import OpenAI
 import requests
 
-# 设置全局变量：API Key 和 Custom Search Engine ID
-
-API_KEY = "AIzaSyCy0E5Mxz0nhHdw77cpRGdTmjOEEbJA6KE"
-CX = "37d4042c4eca640d2"
+API_KEY = None
+CX = None
 
 
 def google_search(query: str, num_results: int = 5):
     """
     使用 Google Custom Search Engine API 执行搜索查询。
-
-    Args:
-        query (str): 搜索关键词。
-        num_results (int): 返回的搜索结果数量（默认 5 条）。
-
-    Returns:
-        str: 格式化后的搜索结果文本或错误信息。
+    :param query        : (str) 搜索关键词。
+    :param num_results  : (int) 返回的搜索结果数量（默认 5 条）。
+    :return             : (str)格式化后的搜索结果文本或错误信息。
     """
+
     # Google CSE API 的请求 URL
     base_url = "https://www.googleapis.com/customsearch/v1"
 
@@ -66,6 +60,6 @@ def google_search(query: str, num_results: int = 5):
 
 
 if __name__ == '__main__':
-    query = "Who won the 2024 US presidential election?"
-    result = google_search(query=query, num_results=3)
+    aquery = "Who won the 2024 US presidential election?"
+    result = google_search(query=aquery, num_results=3)
     print(result)

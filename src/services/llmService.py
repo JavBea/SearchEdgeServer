@@ -6,6 +6,7 @@
 
 import json
 
+from openai import OpenAI
 from src.services.llmServices.gptService import query_service as gpt_query
 from src.services.llmServices.qwenService import query_service as qwen_query
 
@@ -33,9 +34,25 @@ def llm_query_service(query, llm="chatgpt", model=None, messages=None, func_on=T
         return gpt_query(query, model, messages, gpt_functions, func_on)
 
 
+def llm_client_init():
+    """
+    初始化各个大模型访问客户端实例
+    :return:
+    """
+
+    from src.services.llmServices import gptService
+    from src.services.llmServices import qwenService
+    from src.config import apis
+    gptService.client = OpenAI(api_key=apis.GPT_API)
+    qwenService.client = OpenAI(
+        api_key=apis.QWEN_API,
+        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+    )
+
+    return True
+
 if __name__ == '__main__':
     from src.config.functions import gpt_functions as declarations
 
-    res2 = llm_query_service("Who won the 2024 US presidential election", model="gpt-4o", messages=None,
-                             functions=declarations, func_on=True)
+    res2 = llm_query_service("Who won the 2024 US presidential election", model="gpt-4o", messages=None, func_on=True)
     print("RAG response: " + res2)

@@ -11,13 +11,14 @@ from openai import OpenAI
 from src.services.searchServices.googleService import google_search
 
 from src.utils.fix_arguments import fix_arguments
+from src.config.apis import QWEN_API as API_KEY
 
 # 创建 OpenAI 客户端实例，并通过 API 密钥进行身份验证。
-client = OpenAI(
-    # 若没有配置环境变量，请用百炼API Key将下行替换为：api_key="sk-xxx",
-    api_key="sk-d7dd58cac6d849199d7c000c105047af",
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
-)
+# client = OpenAI(
+#     api_key=API_KEY,
+#     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+# )
+client = None
 
 
 def query_service(query, model="qwen-plus", messages=None, functions=None, func_on=True):
@@ -58,7 +59,7 @@ def query_service(query, model="qwen-plus", messages=None, functions=None, func_
             # 调用Google API进行调用
 
             result = google_search(query=arguments["query"], num_results=arguments.get("num_results", 3))
-            # print(result)
+            print(result)
             # 将结果返回给大模型
             messages = [
                 {"role": "user", "content": query},
