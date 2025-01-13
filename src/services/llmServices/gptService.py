@@ -78,7 +78,6 @@ def query_service(query, model="gpt-4o", messages=None, functions=None, func_on=
     # 返回最终结果
     return response_message_content
 
-
 def __single_request(query, model="gpt-4o", messages=None, functions=None):
     """
     向gpt的API问题请求操作，这是仅供本文件使用的函数

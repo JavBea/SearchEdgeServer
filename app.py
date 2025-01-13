@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
 import sys
 
 import src.config.config as config
 from src.blueprints.llm_bp import llm_bp
 import pymysql
 
+from src.blueprints.login_bp import login_bp
+from src.blueprints.register_bp import register_bp
 from src.services.dbService import db
 
 from src.services.ApiService import ApiService
@@ -38,7 +39,8 @@ with app.app_context():
 CORS(app, resources={r"/*": {"origins": r"http://localhost:\d+"}})
 
 app.register_blueprint(llm_bp, url_prefix='/llm')
-
+app.register_blueprint(login_bp)
+app.register_blueprint(register_bp)
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -73,7 +75,7 @@ def initialize():
     llm_client_init()
 
     # 初始化搜索引擎访问方法
-    from src.services.SearchService import search_client_init
+    from src.services.searchService import search_client_init
     search_client_init()
 
 

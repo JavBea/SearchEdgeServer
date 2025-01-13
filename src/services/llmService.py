@@ -18,7 +18,6 @@ def llm_query_service(query, llm="chatgpt", model=None, messages=None, func_on=T
     :param llm      : (str)  请求的大模型系列；默认为chatgpt
     :param model    : (str)  请求的具体模型； 默认为None
     :param messages : (dict)  请求的上下文环境；默认为None
-    :param functions: (dict)  可供调用的函数说明；默认为None
     :param func_on  : (bool) 是否开启函数调用；默认为 True,即开启
     :return : (str) 得到的回答
     """
