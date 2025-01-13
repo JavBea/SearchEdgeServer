@@ -90,7 +90,8 @@ class UserService:
         :param role: 用户角色（'user' 或 'admin'）
         :param user_name: 用户名
         :param email: 用户邮箱
-        :return: 新创建的User对象, 注册响应码code：code=1001(注册成功),code=1002(用户名已被占用),code=1003(邮箱已被占用),code=1004(密码格式错误)
+        :return: 新创建的User对象, 注册响应码code：code=1001(注册成功),code=1002(用户名已被占用),
+                code=1003(邮箱已被占用),code=1004(密码格式错误),code=1005(邮箱格式错误)
         """
 
         # 如果用户名已被占用
@@ -108,6 +109,13 @@ class UserService:
         # 检查密码是否符合要求
         if not password_checker.is_valid_password(password):
             code = "1004"
+            return None, code
+
+        from src.utils import email_checker
+
+        # 检查邮箱格式是否正确
+        if not email_checker.is_valid_email(email):
+            code = "1005"
             return None, code
 
         new_user = User(password=password, role=role, user_name=user_name, email=email)
