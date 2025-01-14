@@ -8,6 +8,7 @@ import pymysql
 
 from src.blueprints.login_bp import login_bp
 from src.blueprints.register_bp import register_bp
+from src.blueprints.conversation_bp import conversation_bp
 from src.services.dbService import db
 
 # 设置整个项目的默认编码模式为“utf-8”
@@ -39,6 +40,8 @@ CORS(app, resources={r"/*": {"origins": r"http://localhost:\d+"}})
 app.register_blueprint(llm_bp, url_prefix='/llm')
 app.register_blueprint(login_bp)
 app.register_blueprint(register_bp)
+app.register_blueprint(conversation_bp)
+
 
 @app.route('/')
 def hello_world():  # put application's code here

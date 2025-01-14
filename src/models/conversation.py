@@ -1,11 +1,9 @@
-from typing import List, Optional
-
-from sqlalchemy import Enum, ForeignKeyConstraint, Index, Integer, String, TIMESTAMP, text
-from sqlalchemy.dialects.mysql import ENUM
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 import datetime
+from typing import Optional
 
-from src.models.user import User
+from sqlalchemy import ForeignKeyConstraint, Index, Integer, String, TIMESTAMP, text
+from sqlalchemy.orm import Mapped, mapped_column
+
 from src.services.dbService import db
 
 
@@ -24,4 +22,4 @@ class Conversation(db.Model):
     updated_at: Mapped[Optional[datetime.datetime]] = mapped_column(TIMESTAMP, server_default=text(
         'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
 
-    user: Mapped['User'] = relationship('Users', back_populates='conversations')
+    # user: Mapped['User'] = relationship('User', back_populates='conversations')
