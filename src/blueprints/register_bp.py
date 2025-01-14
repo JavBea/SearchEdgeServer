@@ -9,7 +9,7 @@ import flask
 from src.services.modelServices.UserService import UserService
 from src.utils.json_generator.register_response_json import RegisterResponseJson
 
-# 实例化蓝图对象“llm”
+# 实例化蓝图对象“register_bp”
 register_bp = flask.Blueprint('register_module', __name__)
 
 

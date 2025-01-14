@@ -11,7 +11,7 @@ import flask
 from src.services.modelServices.ConversationService import ConversationService
 from src.utils.json_generator.conversation_response_json import ConversationResponseJson
 
-# 实例化蓝图对象“llm”
+# 实例化蓝图对象“conversation_bp”
 conversation_bp = flask.Blueprint('conversation_module', __name__)
 
 

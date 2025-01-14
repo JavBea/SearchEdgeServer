@@ -12,7 +12,7 @@ from src.models.conversation import Conversation
 
 class ConversationResponseJson:
     """
-    生成登录请求回复时的JSON格式类
+    生成会话请求回复时的JSON格式类
     """
 
     def __init__(self, conversation: Conversation):

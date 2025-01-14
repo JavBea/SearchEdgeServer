@@ -10,7 +10,7 @@ import flask
 from src.services.modelServices.UserService import UserService
 from src.utils.json_generator.login_response_json import LoginResponseJson
 
-# 实例化蓝图对象“llm”
+# 实例化蓝图对象“login_bp”
 login_bp = flask.Blueprint('login_module', __name__)
 
 

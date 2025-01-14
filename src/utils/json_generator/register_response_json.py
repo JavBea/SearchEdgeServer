@@ -10,7 +10,7 @@ from src.models.user import User
 
 class RegisterResponseJson:
     """
-    生成登录请求回复时的JSON格式类
+    生成注册请求回复时的JSON格式类
     """
 
     def __init__(self, user: User, code: str):

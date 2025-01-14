@@ -7,6 +7,7 @@ from src.blueprints.llm_bp import llm_bp
 import pymysql
 
 from src.blueprints.login_bp import login_bp
+from src.blueprints.message_bp import message_bp
 from src.blueprints.register_bp import register_bp
 from src.blueprints.conversation_bp import conversation_bp
 from src.services.dbService import db
@@ -41,6 +42,7 @@ app.register_blueprint(llm_bp, url_prefix='/llm')
 app.register_blueprint(login_bp)
 app.register_blueprint(register_bp)
 app.register_blueprint(conversation_bp)
+app.register_blueprint(message_bp, url_prefix='/message')
 
 
 @app.route('/')

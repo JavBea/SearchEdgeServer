@@ -67,6 +67,18 @@ class ConversationService:
             raise e
 
     @staticmethod
+    def check_conversation(conversation_id: int):
+        """
+        根据id检查会话是否存在
+        :param conversation_id: 检索的会话id
+        :return: 返回布尔值
+        """
+        conversation = ConversationService.get_conversation_by_id(conversation_id)
+        if conversation is None:
+            return False
+        return True
+
+    @staticmethod
     def update_conversation(conversation_id: int, **kwargs):
         """
         根据会话ID更新会话信息。

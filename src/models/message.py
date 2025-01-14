@@ -22,4 +22,4 @@ class Message(db.Model):
     message_content: Mapped[str] = mapped_column(Text)
     created_at: Mapped[Optional[datetime.datetime]] = mapped_column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP'))
 
-    conversation: Mapped['Conversation'] = relationship('Conversations', back_populates='conversation_messages')
+    # conversation: Mapped['Conversation'] = relationship('Conversations', back_populates='conversation_messages')

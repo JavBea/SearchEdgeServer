@@ -9,7 +9,7 @@ import flask
 from src.services import llmService
 from src.utils.json_generator.llm_response_json import LlmResponseJson
 
-# 实例化蓝图对象“llm”
+# 实例化蓝图对象“llm_bp”
 llm_bp = flask.Blueprint('llm_module', __name__)
 
 
