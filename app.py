@@ -10,8 +10,6 @@ from src.blueprints.login_bp import login_bp
 from src.blueprints.register_bp import register_bp
 from src.services.dbService import db
 
-from src.services.ApiService import ApiService
-
 # 设置整个项目的默认编码模式为“utf-8”
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -66,7 +64,7 @@ def initialize():
     """
     from src.config import apis
     if not apis.INIT_FLAG:
-        from src.services.ApiService import ApiService
+        from src.services.modelServices.ApiService import ApiService
         ApiService.update_api_file()
         apis.INIT_FLAG = True
 

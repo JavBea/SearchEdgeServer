@@ -6,7 +6,7 @@
 from flask import request
 import flask
 
-from src.services.UserService import UserService
+from src.services.modelServices.UserService import UserService
 from src.utils.json_generator.register_response_json import RegisterResponseJson
 
 # 实例化蓝图对象“llm”
