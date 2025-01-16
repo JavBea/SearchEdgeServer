@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 # @FileName  :__init__.py.py
-# @Time      :2025/1/8 17:17
+# @Time      :2025/1/16 18:45
 # @Author    :Shao YiHan
 """
-这个包用来存储各个响应代码JSON格式的各生成方法
+这个包中的代码用来为启发式规则提供一些有用的工具
 """
 if __name__ == '__main__':
-    code = 0
+    codes = 0
