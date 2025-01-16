@@ -29,6 +29,20 @@ def query_route():
     return res.to_json()
 
 
+@llm_bp.route('/multiquery', methods=['POST'])
+def multi_query_route():
+    # 获取请求
+    data = request.get_json()
+    # 获取请求的各个字段
+    query = data['query']
+    func_on = data['func_on']
+
+    # 获得请求内容
+    responses_content = llmService.llm_multi_query_service(query, func_on=func_on)
+    res = LlmResponseJson.multi_to_json(responses_content)
+    return res
+
+
 if __name__ == '__main__':
     response = LlmResponseJson("AAA-猪肉批发", True)
     print(response.to_json())

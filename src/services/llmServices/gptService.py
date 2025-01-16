@@ -6,15 +6,12 @@
 import json
 
 from src.services.searchServices.googleService import google_search
+from src.models.llm import LLM
 
-# 创建 OpenAI 客户端实例，并通过 API 密钥进行身份验证。
-# client = OpenAI(
-#     api_key=API_KEY
-# )
 client = None
 
 
-def query_service(query, model="gpt-4o", messages=None, functions=None, func_on=True):
+def query_service(query, model=LLM.CHATGPT.value["model1"], messages=None, functions=None, func_on=True):
     """
     向gpt的API问题请求操作，这是向外部文件提供的函数
     :param query    :(str) 请求的问题
@@ -27,7 +24,7 @@ def query_service(query, model="gpt-4o", messages=None, functions=None, func_on=
 
     # 默认模型为"gpt-4o"
     if model is None:
-        model = "gpt-4o"
+        model = LLM.CHATGPT.value["model1"]
 
     # 如果关闭了函数调用
     if (not func_on) or (functions is None):
@@ -78,7 +75,8 @@ def query_service(query, model="gpt-4o", messages=None, functions=None, func_on=
     # 返回最终结果
     return response_message_content
 
-def __single_request(query, model="gpt-4o", messages=None, functions=None):
+
+def __single_request(query, model=LLM.CHATGPT.value["model1"], messages=None, functions=None):
     """
     向gpt的API问题请求操作，这是仅供本文件使用的函数
     :param query    :(str) 请求的问题

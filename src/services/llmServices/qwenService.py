@@ -6,22 +6,14 @@
 
 import json
 
-from openai import OpenAI
-
 from src.services.searchServices.googleService import google_search
-
+from src.models.llm import LLM
 from src.utils.fix_arguments import fix_arguments
-from src.config.apis import QWEN_API as API_KEY
 
-# 创建 OpenAI 客户端实例，并通过 API 密钥进行身份验证。
-# client = OpenAI(
-#     api_key=API_KEY,
-#     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
-# )
 client = None
 
 
-def query_service(query, model="qwen-plus", messages=None, functions=None, func_on=True):
+def query_service(query, model=LLM.QWEN.value["model1"], messages=None, functions=None, func_on=True):
     """
     向qwen的API问题请求操作，这是向外部文件提供的函数
     :param query    :(str) 请求的问题
@@ -34,7 +26,7 @@ def query_service(query, model="qwen-plus", messages=None, functions=None, func_
 
     # 默认模型为"qwen-plus"
     if model is None:
-        model = "qwen-plus"
+        model = LLM.QWEN.value["model1"]
 
     # 如果关闭了函数调用
     if (not func_on) or (functions is None):
@@ -89,7 +81,7 @@ def query_service(query, model="qwen-plus", messages=None, functions=None, func_
     return response_message_content
 
 
-def __single_request(query, model="qwen-plus", messages=None, functions=None):
+def __single_request(query, model=LLM.QWEN.value["model1"], messages=None, functions=None):
     """
     向qwen的API问题请求操作，这是仅供本文件使用的函数
     :param query    :(str) 请求的问题
