@@ -7,7 +7,7 @@
 import json
 
 from src.services.searchServices.googleService import google_search
-from src.models.llm import LLM
+from src.config.llms import LLM
 from src.utils.fix_arguments import fix_arguments
 
 client = None

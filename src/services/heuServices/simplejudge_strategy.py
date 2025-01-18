@@ -3,7 +3,7 @@
 # @FileName  :simplejudge_strategy.py
 # @Time      :2025/1/15 20:01
 # @Author    :Shao YiHan
-from src.models.llm import LLM
+from src.config.llms import LLM
 
 
 def simple_judge_strategy(llm: str, content: str, query: str):

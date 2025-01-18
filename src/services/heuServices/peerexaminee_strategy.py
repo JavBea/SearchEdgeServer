@@ -5,7 +5,8 @@
 # @Author    :Shao YiHan
 
 # def peer_examinee_strategy():
-
+import nltk
+nltk.find('.')
 
 
 if __name__ == '__main__':
