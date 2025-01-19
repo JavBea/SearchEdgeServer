@@ -4,18 +4,20 @@
 # @Time      :2025/1/15 20:01
 # @Author    :Shao YiHan
 from src.config.llms import LLM
+from src.config.searchs import SearchStrategy
+
 from src.utils.heu_kits.simple_methods import extract_and_validate_equations
 from src.utils.heu_kits.simple_methods import validate_year_and_month
 from src.utils.heu_kits.simple_methods import search_pattern
+
 from src.services.searchService import search_service
-from src.services.searchService import SearchStrategy
 
 
 def simple_judge_strategy(llm: str, content: str, query: str):
     """
     通过一些简约的方法，针对特定问题（大模型经常出现幻觉的问题），判定当前大模型是否陷入幻觉
     :param llm      : 当前回答对应的大模型
-    :param content  : 当前的回答
+    :param content  : 当前的回答内容
     :param query    : 回答对应的问题
     :return         : (float) 未陷入幻觉 (大模型可靠)的概率
     """
@@ -35,9 +37,9 @@ def simple_judge_strategy(llm: str, content: str, query: str):
     args3 = 100
     if llm == LLM.CHATGPT.value["series_name"]:
         # 如果当前大模型是ChatGPT
-        args3 -= 50 if search_pattern(content,"I'm sorry") else 0
+        args3 -= 30 if search_pattern(content,"I'm sorry") else 0
         args3 -= 50 if search_pattern(content,"after October 2023") else 0
-        args3 -= 50 if search_pattern(content,"抱歉") else 0
+        args3 -= 30 if search_pattern(content,"抱歉") else 0
         args3 -= 50 if search_pattern(content,"知识更新截止") else 0
 
     elif llm == LLM.QWEN.value["series_name"]:
