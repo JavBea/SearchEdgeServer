@@ -6,17 +6,18 @@
 
 from src.services.searchServices.googleService import google_search
 from src.services.searchServices.baiduService import baidu_search
+from src.config.searchs import SearchStrategy
 
 
-def search_service(query: str, method="google_search", num_results: int = 5):
+def search_service(query: str, method=SearchStrategy.GOOGLESEARCH.value, num_results: int = 5):
     """
     选择不同的信息检索方法
     :param query        : (str) 搜索关键词。
-    :param method:      : (str) 选择的搜索方法
+    :param method:      : (int) 选择的搜索方案
     :param num_results  : (int) 返回的搜索结果数量（默认 5 条）。
     :return             : (str) 格式化后的搜索结果文本或错误信息。
     """
-    if method == "baidu_search":
+    if method == SearchStrategy.BAIDUSEARCH.value:
         result = baidu_search(query, num_results)
     else:
         result = google_search(query, num_results)
