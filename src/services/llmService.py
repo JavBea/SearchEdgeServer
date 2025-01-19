@@ -96,7 +96,9 @@ def llm_single_model_multi_query_service(query, llm, model, messages=None, func_
 
 if __name__ == '__main__':
     llm_client_init()
-    res2 = llm_single_model_multi_query_service(
-        query="Who are you?", llm="chatgpt", model="gpt-4o", messages=None, func_on=True)
-
+    from src.services.heuServices.peerexaminee_strategy import peer_examinee_strategy
+    res2 = peer_examinee_strategy(former_query="Who is Albert Einstein",
+                                  former_content="He is a cat",
+                                  examinee_llm=3,
+                                  former_messages=None)
     print(res2)

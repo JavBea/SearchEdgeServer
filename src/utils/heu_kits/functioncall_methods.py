@@ -6,6 +6,7 @@
 
 import spacy
 from collections import Counter
+import re
 
 # 加载spaCy的英文模型
 nlp = spacy.load("en_core_web_sm")
@@ -62,3 +63,4 @@ if __name__ == '__main__':
     # 计算candidate的可靠性评分
     reliability = calculate_reliability(reference_text, candidate_text)
     print(f"Candidate's Reliability Score: {reliability:.2f}%")
+

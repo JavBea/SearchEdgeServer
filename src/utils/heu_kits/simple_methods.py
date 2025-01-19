@@ -94,7 +94,7 @@ def __validate_equation__(equation):
 
 
 """
-经验检测
+提供给外部的函数
 """
 
 
@@ -144,11 +144,6 @@ def search_pattern(text: str, pattern: str) -> bool:
             else:
                 i += 1
     return False  # 如果遍历结束都没有找到匹配
-
-
-"""
-提供给外部的函数
-"""
 
 
 def extract_and_validate_equations(text):
