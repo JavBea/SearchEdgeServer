@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :ApiService.py
+# @FileName  :ApiDao.py
 # @Time      :2025/1/12 11:12
 # @Author    :Shao YiHan
 from src.services.dbService import db
@@ -9,7 +9,7 @@ from sqlalchemy.exc import SQLAlchemyError
 import app
 
 
-class ApiService:
+class ApiDao:
 
     @staticmethod
     def create_api(name, api_key, other):
@@ -45,13 +45,13 @@ class ApiService:
         :return: (bool) 是否成功更新api变量
         """
         from src.config import apis
-        apis.GPT_API = ApiService.get_api_by_name('chatgpt').api_key
-        apis.QWEN_API = ApiService.get_api_by_name('qwen').api_key
-        apis.GOOGLE_CSE_API = ApiService.get_api_by_name('google').api_key
-        apis.GOOGLE_CSE_CX = ApiService.get_api_by_name('google').other
+        apis.GPT_API = ApiDao.get_api_by_name('chatgpt').api_key
+        apis.QWEN_API = ApiDao.get_api_by_name('qwen').api_key
+        apis.GOOGLE_CSE_API = ApiDao.get_api_by_name('google').api_key
+        apis.GOOGLE_CSE_CX = ApiDao.get_api_by_name('google').other
 
 
 if __name__ == '__main__':
-    service = ApiService()
+    service = ApiDao()
     print(service.get_api_by_name('chatgpt').str())
     code = 0

@@ -6,7 +6,7 @@
 from flask import request
 import flask
 
-from src.services.modelServices.UserService import UserService
+from src.dao.UserDao import UserDao
 from src.utils.json_generator.register_response_json import RegisterResponseJson
 
 # 实例化蓝图对象“register_bp”
@@ -22,7 +22,7 @@ def register():
     password = data['password']
     email = data['email']
 
-    user, code = UserService.create_user(password=password, email=email, user_name=user_name)
+    user, code = UserDao.create_user(password=password, email=email, user_name=user_name)
 
     res = RegisterResponseJson(user, code)
 

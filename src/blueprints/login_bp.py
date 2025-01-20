@@ -7,7 +7,7 @@
 from flask import request
 import flask
 
-from src.services.modelServices.UserService import UserService
+from src.dao.UserDao import UserDao
 from src.utils.json_generator.login_response_json import LoginResponseJson
 
 # 实例化蓝图对象“login_bp”
@@ -24,7 +24,7 @@ def login():
     token = data['token']
     password = data['password']
 
-    user, code = UserService.check_user(token, password)
+    user, code = UserDao.check_user(token, password)
 
     res = LoginResponseJson(user,code)
 

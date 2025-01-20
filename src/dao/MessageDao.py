@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :MessageService.py
+# @FileName  :MessageDao.py
 # @Time      :2025/1/13 17:10
 # @Author    :Shao YiHan
 from sqlalchemy import asc
@@ -10,7 +10,7 @@ from src.models.message import Message
 from sqlalchemy.exc import SQLAlchemyError
 
 
-class MessageService:
+class MessageDao:
 
     @staticmethod
     def get_message_by_id(message_id: int) -> Message:
@@ -61,7 +61,7 @@ class MessageService:
         :param message_id: 消息ID
         :return: 删除成功返回True，否则返回False
         """
-        message = MessageService.get_message_by_id(message_id)
+        message = MessageDao.get_message_by_id(message_id)
         if not message:
             raise ValueError("消息未找到")
 
@@ -81,7 +81,7 @@ class MessageService:
         :param kwargs: 要更新的字段及其值
         :return: 更新后的Message对象
         """
-        message = MessageService.get_message_by_id(message_id)
+        message = MessageDao.get_message_by_id(message_id)
         if not message:
             raise ValueError("消息未找到")
 

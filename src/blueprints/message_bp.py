@@ -6,7 +6,7 @@
 from flask import request
 import flask
 
-from src.services.modelServices.MessageService import MessageService
+from src.dao.MessageDao import MessageDao
 from src.utils.json_generator.message_response_json import MessageResponseJson
 
 # 实例化蓝图对象“message_bp”
@@ -21,7 +21,7 @@ def get_all_messges():
     # 获取请求的各个字段
     conversation_id = data['conversation_id']
 
-    messages = MessageService.get_messages_by_conversation_id(conversation_id)
+    messages = MessageDao.get_messages_by_conversation_id(conversation_id)
 
     res = MessageResponseJson.messages_to_json(messages)
 
@@ -38,7 +38,7 @@ def create_all_messges():
     sender = data['sender']
     content = data['content']
 
-    message = MessageService.create_message(conversation_id=conversation_id, sender=sender, message_content=content)
+    message = MessageDao.create_message(conversation_id=conversation_id, sender=sender, message_content=content)
 
     res = MessageResponseJson(message=message)
 

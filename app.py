@@ -72,8 +72,8 @@ def initialize():
     """
     from src.config import apis
     if not apis.INIT_FLAG:
-        from src.services.modelServices.ApiService import ApiService
-        ApiService.update_api_file()
+        from src.dao.ApiDao import ApiDao
+        ApiDao.update_api_file()
         apis.INIT_FLAG = True
 
     # 初始化大模型访问客户端

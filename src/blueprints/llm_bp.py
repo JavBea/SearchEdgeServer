@@ -5,7 +5,6 @@
 # @Author    :Shao YiHan
 from flask import request
 import flask
-from flask_restx import api
 
 from src.services import llmService
 from src.utils.json_generator.llm_response_json import LlmResponseJson

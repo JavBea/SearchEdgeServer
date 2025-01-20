@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :UserService.py
+# @FileName  :UserDao.py
 # @Time      :2025/1/13 17:07
 # @Author    :Shao YiHan
 from typing import Optional
@@ -10,7 +10,7 @@ from src.models.user import User
 from sqlalchemy.exc import SQLAlchemyError
 
 
-class UserService:
+class UserDao:
 
     @staticmethod
     def get_user_by_id(user_id: int) -> User:
@@ -95,12 +95,12 @@ class UserService:
         """
 
         # 如果用户名已被占用
-        if UserService.get_user_by_name(user_name) is not None:
+        if UserDao.get_user_by_name(user_name) is not None:
             code = "1002"
             return None, code
 
         # 如果邮箱已被占用
-        if UserService.get_user_by_email(email) is not None:
+        if UserDao.get_user_by_email(email) is not None:
             code = "1003"
             return None, code
 
@@ -136,7 +136,7 @@ class UserService:
         :param kwargs: 要更新的字段及其值
         :return: 更新后的User对象
         """
-        user = UserService.get_user_by_id(user_id)
+        user = UserDao.get_user_by_id(user_id)
         if not user:
             raise ValueError("用户未找到")
 
@@ -158,7 +158,7 @@ class UserService:
         :param user_id: 用户ID
         :return: 删除成功返回True，否则返回False
         """
-        user = UserService.get_user_by_id(user_id)
+        user = UserDao.get_user_by_id(user_id)
         if not user:
             raise ValueError("用户未找到")
 

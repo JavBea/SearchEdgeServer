@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @FileName  :ConversationService.py
+# @FileName  :ConversationDao.py
 # @Time      :2025/1/13 17:09
 # @Author    :Shao YiHan
 from typing import Optional
@@ -10,7 +10,7 @@ from src.models.conversation import Conversation
 from sqlalchemy.exc import SQLAlchemyError
 
 
-class ConversationService:
+class ConversationDao:
 
     @staticmethod
     def get_conversation_by_id(conversation_id: int) -> Conversation:
@@ -33,9 +33,9 @@ class ConversationService:
         """
         try:
             # 检查user_id是否存在
-            from src.services.modelServices.UserService import UserService
+            from src.dao.UserDao import UserDao
 
-            if UserService.get_user_by_id(user_id) is None:
+            if UserDao.get_user_by_id(user_id) is None:
                 return None
 
             return Conversation.query.filter_by(user_id=user_id).all()
@@ -52,9 +52,9 @@ class ConversationService:
         """
 
         # 检查user_id是否存在
-        from src.services.modelServices.UserService import UserService
+        from src.dao.UserDao import UserDao
 
-        if UserService.get_user_by_id(user_id) is None:
+        if UserDao.get_user_by_id(user_id) is None:
             return None, "3002"
 
         new_conversation = Conversation(user_id=user_id, title=title)
@@ -73,7 +73,7 @@ class ConversationService:
         :param conversation_id: 检索的会话id
         :return: 返回布尔值
         """
-        conversation = ConversationService.get_conversation_by_id(conversation_id)
+        conversation = ConversationDao.get_conversation_by_id(conversation_id)
         if conversation is None:
             return False
         return True
@@ -86,7 +86,7 @@ class ConversationService:
         :param kwargs: 要更新的字段及其值
         :return: 更新后的Conversation对象, 更新响应码code：code=4001(会话更新成功),code=4002(会话更新失败)
         """
-        conversation = ConversationService.get_conversation_by_id(conversation_id)
+        conversation = ConversationDao.get_conversation_by_id(conversation_id)
 
         if not conversation:
             return None, "4002"
@@ -109,7 +109,7 @@ class ConversationService:
         :param conversation_id: 会话ID
         :return: 删除成功返回True，否则返回False
         """
-        conversation = ConversationService.get_conversation_by_id(conversation_id)
+        conversation = ConversationDao.get_conversation_by_id(conversation_id)
         if not conversation:
             raise ValueError("会话未找到")
 
