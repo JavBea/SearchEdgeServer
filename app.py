@@ -5,6 +5,7 @@ import sys
 import src.config.config as config
 from src.blueprints.llm_bp import llm_bp
 import pymysql
+from flasgger import Swagger
 
 from src.blueprints.login_bp import login_bp
 from src.blueprints.message_bp import message_bp
@@ -29,6 +30,7 @@ with app.app_context():
 app.config.from_object(config)
 # 初始化一个SQLAlchemy对象
 db.init_app(app)
+swagger = Swagger(app)
 
 # 测试数据库连接是否成功（create_all将定义的所有表类映射为数据库下的表）
 with app.app_context():
