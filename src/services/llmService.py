@@ -17,9 +17,9 @@ def llm_query_service(query, llm=LLM.CHATGPT.value["series_name"], model=None, m
     """
     选择不同系列的大模型、具体模型，在上下文环境和函数说明下，对请求返回结果
     :param query    : (str)  请求的问题
-    :param llm      : (str)  请求的大模型系列；默认为chatgpt
-    :param model    : (str)  请求的具体模型； 默认为None
-    :param messages : (dict)  请求的上下文环境；默认为None
+    :param llm      : (str)  请求的大模型系列；默认为 chatgpt
+    :param model    : (str)  请求的具体模型； 默认为 None
+    :param messages : (dict)  请求的上下文环境；默认为 None
     :param func_on  : (bool) 是否开启函数调用；默认为 True,即开启
     :return : (str) 得到的回答
     """

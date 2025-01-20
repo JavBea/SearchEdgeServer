@@ -24,11 +24,13 @@ def peer_examinee_strategy(former_query: str, former_content: str, examinee_llm:
                   "information. The messages field represents the context, the query field represents the content of "
                   "the request, and the Content field represents the response of the large model:")
     query_body = "messages:\n"+str(former_messages)+"\n"+"query:"+former_query+"\n"+"content:\n"+former_content
-    query_foot = ("Return the value in the format of result=(bool), where False indicates that you are not "
+    query_tail = ("\nReturn the value in the format of result=(bool), where False indicates that you are not "
                   "hallucinating and True indicates that you are hallucinating")
 
     # 组成完整请求
-    query = query_head+query_body+query_foot
+    query = query_head+query_body+query_tail
+
+    print("query:\n"+query)
 
     # 选取合适的examiner LLM
     if examinee_llm == LLM.CHATGPT.value:
@@ -38,7 +40,7 @@ def peer_examinee_strategy(former_query: str, former_content: str, examinee_llm:
         # 默认选ChatGPT作examiner
         result = llm_query_service(query=query, llm=LLM.CHATGPT.value, messages=former_messages, func_on=False)
 
-    # print(result)
+    print("\nresult:\n"+result)
 
     # 从评测结果中提取结果，如果认为陷入幻觉则返回0，否则返回100
     if extract_bool(result):

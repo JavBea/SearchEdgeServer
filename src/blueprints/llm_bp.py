@@ -5,12 +5,14 @@
 # @Author    :Shao YiHan
 from flask import request
 import flask
+from flask_restx import Api, Resource
 
 from src.services import llmService
 from src.utils.json_generator.llm_response_json import LlmResponseJson
 
 # 实例化蓝图对象“llm_bp”
 llm_bp = flask.Blueprint('llm_module', __name__)
+# llm_api = Api(llm_bp)
 
 
 @llm_bp.route('/query', methods=['POST'])

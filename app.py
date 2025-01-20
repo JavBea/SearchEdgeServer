@@ -17,6 +17,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 app = Flask(__name__)
 
+
 # 需要在应用上下文中执行的代码
 with app.app_context():
     # 此处的代码以安全地访问 Flask 配置与数据库
@@ -45,19 +46,19 @@ app.register_blueprint(conversation_bp)
 app.register_blueprint(message_bp, url_prefix='/message')
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-
-    from src.config.apis import GPT_API
-    from src.config.apis import QWEN_API
-    from src.config.apis import GOOGLE_CSE_API
-    from src.config.apis import GOOGLE_CSE_CX
-    print("this GPT_API: " + GPT_API)
-    print("this QWEN_API: " + QWEN_API)
-    print("this Google_API: " + GOOGLE_CSE_API)
-    print("this Google_CX: " + GOOGLE_CSE_CX)
-
-    return 'Hello You!'
+# @app.route('/')
+# def hello_world():  # put application's code here
+#
+#     from src.config.apis import GPT_API
+#     from src.config.apis import QWEN_API
+#     from src.config.apis import GOOGLE_CSE_API
+#     from src.config.apis import GOOGLE_CSE_CX
+#     print("this GPT_API: " + GPT_API)
+#     print("this QWEN_API: " + QWEN_API)
+#     print("this Google_API: " + GOOGLE_CSE_API)
+#     print("this Google_CX: " + GOOGLE_CSE_CX)
+#
+#     return 'Hello You!'
 
 
 @app.before_request
