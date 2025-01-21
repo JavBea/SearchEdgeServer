@@ -55,10 +55,10 @@ def llm_multi_query_service(query, messages=None, func_on=True):
     :param query    : (str)  请求的问题
     :param messages : (dict) 请求的上下文环境；默认为None
     :param func_on  : (bool) 是否开启函数调用；默认为 True,即开启
-    :return         : (list) 返回各个模型的回答
+    :return         : (dict) 返回各个模型的回答
     """
-    result = [gpt_query(query, model=None, messages=messages, functions=gpt_functions, func_on=func_on),
-              qwen_query(query, model=None, messages=messages, functions=qwen_functions, func_on=func_on)]
+    result = {"chatgpt": gpt_query(query, model=None, messages=messages, functions=gpt_functions, func_on=func_on),
+              "qwen": qwen_query(query, model=None, messages=messages, functions=qwen_functions, func_on=func_on)}
     return result
 
 
@@ -97,6 +97,7 @@ def llm_single_model_multi_query_service(query, llm, model, messages=None, func_
 if __name__ == '__main__':
     llm_client_init()
     from src.services.heuServices.peerexaminee_strategy import peer_examinee_strategy
+
     res2 = peer_examinee_strategy(former_query="Who is Albert Einstein",
                                   former_content="He is a cat",
                                   examinee_llm=3,

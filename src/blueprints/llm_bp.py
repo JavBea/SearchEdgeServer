@@ -16,54 +16,54 @@ llm_bp = flask.Blueprint('llm_module', __name__)
 @llm_bp.route('/query', methods=['POST'])
 def query_route():
     """
-    This endpoint processes a POST request with a JSON body containing
-    'query' and 'func_on' fields and returns a JSON response with 'content'
-    and 'status' fields.
+    向大模型的单次请求
     ---
     tags:
-      - Example API
+      - Single Query API
     parameters:
-      - name: query
+      - name: body
         in: body
         required: true
-        type: string
-        description: The query string for processing.
-        example: "select * from users"
-      - name: func_on
-        in: body
-        required: true
-        type: string
-        description: The function or action to perform on the query.
-        example: "execute"
+        schema:
+          id: 单次请求
+          required:
+            - query
+            - func_on
+            - llm
+            - model
+          properties:
+            query:
+              type: string
+              description: 请求的内容.
+              example: "Who are you?"
+            func_on:
+              type: boolean
+              description: 开启函数调用？
+              example: true
+            llm:
+              type: string
+              description: 大模型.
+              example: "chatgpt"
+            model:
+              type: string
+              description: 具体模型.
+              example: "gpt-4o"
     responses:
       200:
         description: Successful processing of the request
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                content:
-                  type: string
-                  description: The result of the query execution or action.
-                  example: "Query executed successfully."
-                status:
-                  type: string
-                  description: The status of the request.
-                  example: "success"
-      400:
-        description: Invalid input data
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                error:
-                  type: string
-                  description: The error message explaining why the request failed.
-                  example: "Missing required fields."
-    :return:
+        schema:
+          id: 单次请求响应
+          properties:
+            content:
+              type: string
+              description: 请求响应
+            status:
+              type: boolean
+              description: 响应有效性
+        examples:
+          application/json: { "content": "I'm your baba", "status": true }
     """
+
     # 获取请求
     data = request.get_json()
     # 获取请求的各个字段
@@ -81,10 +81,46 @@ def query_route():
 @llm_bp.route('/multiquery', methods=['POST'])
 def multi_query_route():
     """
+    向大模型的多重请求
     ---
-    $ref: './swagger/test.yaml'
-    :return:
+    tags:
+      - Multi Query API
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          id: 多重请求
+          required:
+            - query
+            - func_on
+          properties:
+            query:
+              type: string
+              description: 请求的内容.
+              example: "Who are you?"
+            func_on:
+              type: boolean
+              description: 开启函数调用？
+              example: true
+    responses:
+      200:
+        description: Successful processing of the request
+        schema:
+          id: 多重请求响应
+          properties:
+            chatgpt:
+              type: string
+              description: 返回ChatGPT的响应
+              example: "I'm ChatGPT"
+            qwen:
+              type: string
+              description: 返回Qwen的响应
+              example: "I'm Qwen"
+        examples:
+          application/json: { "chatgpt": "I'm ChatGPT", "qwen": "I'm Qwen" }
     """
+
     # 获取请求
     data = request.get_json()
     # 获取请求的各个字段

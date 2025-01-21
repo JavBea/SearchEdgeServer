@@ -38,8 +38,9 @@ with app.app_context():
     db.create_all()  # 创建所有表
 
 # 配置 CORS（允许跨域访问）
-# 只允许 localhost 的所有端口访问
-CORS(app, resources={r"/*": {"origins": r"http://localhost:\d+"}})
+CORS(app)
+# # 只允许 localhost 的所有端口访问
+# CORS(app, resources={r"/*": {"origins": r"http://localhost:\d+"}})
 
 app.register_blueprint(llm_bp, url_prefix='/llm')
 app.register_blueprint(login_bp)
