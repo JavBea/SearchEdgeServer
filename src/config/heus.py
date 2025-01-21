@@ -6,6 +6,18 @@
 from enum import Enum, auto
 
 
+# 启发式规则各种策略
+class HeuStrategy(Enum):
+    # 简约策略
+    SIMPLEJUDGE = auto()
+    # 多反馈策略
+    MULTIQUERY = auto()
+    # 函数调用策略
+    FUNCTIONCALL = auto()
+    # 多模型交互策略
+    PEEREXAMINEE = auto()
+
+
 # 多反馈策略的预设方案
 class MultiQueryStrategy(Enum):
     # 向同一模型多次请求的策略,默认三次

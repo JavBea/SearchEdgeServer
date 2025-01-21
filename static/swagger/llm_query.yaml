@@ -1,0 +1,56 @@
+# 向大模型的单词请求
+---
+tags:
+  - Query API
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: 单次请求
+      required:
+        - query
+        - func_on
+        - heu_on
+        - llm
+        - model
+      properties:
+        query:
+          type: string
+          description: 请求的内容.
+          example: "Who are you?"
+        func_on:
+          type: boolean
+          description: 开启函数调用？
+          example: true
+        heu_on:
+          type: boolean
+          description: 开启启发式规则？
+          example: true
+        llm:
+          type: string
+          description: 大模型.
+          example: "chatgpt"
+        model:
+          type: string
+          description: 具体模型.
+          example: "gpt-4o"
+        heu_list:
+          type: object
+          description: 启发式规则策略列表.
+          example: []
+responses:
+  200:
+    description: Successful processing of the request
+    schema:
+      id: 单次请求响应
+      properties:
+        content:
+          type: string
+          description: 请求响应
+        status:
+          type: boolean
+          description: 响应有效性
+    examples:
+      application/json: { "content": "I'm your baba", "status": true }
+

@@ -3,6 +3,7 @@
 # @FileName  :register_bp.py
 # @Time      :2025/1/13 22:48
 # @Author    :Shao YiHan
+from flasgger import swag_from
 from flask import request
 import flask
 
@@ -14,62 +15,10 @@ register_bp = flask.Blueprint('register_module', __name__)
 
 
 @register_bp.route('/register', methods=['POST'])
+@swag_from('../../static/swagger/register.yaml')
 def register():
     """
     注册请求
-    ---
-    tags:
-      - Register API
-    parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          id: 注册请求
-          required:
-            - user_name
-            - password
-            - email
-          properties:
-            user_name:
-              type: string
-              description: 用户名.
-              example: "userrr"
-            password:
-              type: string
-              description: 密码
-              example: "1223666a"
-            email:
-              type: string
-              description: 绑定的邮箱.
-              example: "ggttg@me.you"
-    responses:
-      200:
-        description: Successful processing of the request
-        schema:
-          id: 注册请求响应
-          properties:
-            code:
-              type: string
-              description: 请求响应码
-            status:
-              type: boolean
-              description: 账号可用性
-            user_id:
-              type: int
-              description: 用户ID
-            user_name:
-              type: string
-              description: 用户名
-            email:
-              type: string
-              description: 绑定的邮箱
-            role:
-              type: string
-              description: 用户身份
-        examples:
-          application/json: {"code": "2001","status": "available","user_id": 10000002,"user_name": "user",
-          "email": "user@gmail.com","role": "user"}
     """
     # 获取请求
     data = request.get_json()

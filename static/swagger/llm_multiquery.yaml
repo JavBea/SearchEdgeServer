@@ -1,0 +1,38 @@
+# 向大模型的多重请求
+---
+tags:
+  - Query API
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: 多重请求
+      required:
+        - query
+        - func_on
+      properties:
+        query:
+          type: string
+          description: 请求的内容.
+          example: "Who are you?"
+        func_on:
+          type: boolean
+          description: 开启函数调用？
+          example: true
+responses:
+  200:
+    description: Successful processing of the request
+    schema:
+      id: 多重请求响应
+      properties:
+        chatgpt:
+          type: string
+          description: 返回ChatGPT的响应
+          example: "I'm ChatGPT"
+        qwen:
+          type: string
+          description: 返回Qwen的响应
+          example: "I'm Qwen"
+    examples:
+      application/json: { "chatgpt": "I'm ChatGPT", "qwen": "I'm Qwen" }

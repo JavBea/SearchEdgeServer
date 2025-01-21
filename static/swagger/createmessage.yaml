@@ -1,0 +1,52 @@
+# 创建消息
+---
+tags:
+  - Message API
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: 获取会话全部信息请求
+      required:
+        - conversation_id
+        - sender
+        - content
+      properties:
+        conversation_id:
+          type: int
+          description: 会话ID.
+          example: 10001
+        sender:
+          type: string
+          description: 信息发送方.
+          example: "user"
+        content:
+          type: string
+          description: 消息内容.
+          example: "who am I ?"
+
+responses:
+  200:
+    description: Successful processing of the request
+    schema:
+      id: 获取会话全部信息请求响应
+      properties:
+        id:
+          type: int
+          description: 消息ID
+        conversation_id:
+          type: int
+          description: 会话ID
+        sender:
+          type: string
+          description: 发送方
+        message_content:
+          type: string
+          description: 消息内容
+        created_at:
+          type: string
+          description: 消息创建时间
+    examples:
+      application/json: {"id": 10000001,"conversation_id": 10001,"sender": "user",
+      "message_content": "aaa","created_at": "2025-01-13T16:03:37"}

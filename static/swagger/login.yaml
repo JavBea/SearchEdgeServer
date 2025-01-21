@@ -1,0 +1,51 @@
+# 登录验证请求
+---
+tags:
+  - Login API
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: 登录验证请求
+      required:
+        - token
+        - password
+      properties:
+        token:
+          type: string
+          description: 登录的用户名或邮箱.
+          example: "user"
+        password:
+          type: string
+          description: 登录密码
+          example: "123456a"
+
+responses:
+  200:
+    description: Successful processing of the request
+    schema:
+      id: 登录验证请求响应
+      properties:
+        code:
+          type: string
+          description: 请求响应码
+        status:
+          type: boolean
+          description: 账号可用性
+        user_id:
+          type: int
+          description: 用户ID
+        user_name:
+          type: string
+          description: 用户名
+        email:
+          type: string
+          description: 绑定的邮箱
+        role:
+          type: string
+          description: 用户身份
+    examples:
+      application/json: {"code": "2001","status": "available","user_id": 10000002,"user_name": "user",
+      "email": "user@gmail.com","role": "user"}
+  
