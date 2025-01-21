@@ -24,8 +24,13 @@ def simple_judge_strategy(llm: str, content: str, query: str):
 
     # 数学等式的检查
     valid_equations, invalid_equations = extract_and_validate_equations(content)
-    # 取正确等式的比例作为第一个参数
-    args1 = len(valid_equations)/(len(valid_equations)+len(invalid_equations))
+
+    # 判断是否有等式
+    if len(valid_equations)+len(invalid_equations) != 0:
+        # 取正确等式的比例作为第一个参数
+        args1 = len(valid_equations)/(len(valid_equations)+len(invalid_equations))
+    else:
+        args1 = 100
 
     # 简单信息检查(时间匹配)
     # 获得str类型的搜索结果

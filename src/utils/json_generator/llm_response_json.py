@@ -11,12 +11,14 @@ class LlmResponseJson:
     生成大模型进行回复时的JSON格式类
     """
 
-    def __init__(self, content, status=False):
+    def __init__(self, content, heu_result, status=False):
         """
         类初始化函数
-        :param content : (str) 主要内容，成功时为大模型的回复，失败时为错误信息
-        :param status  : (bool) 是否成功
+        :param content      : (str) 主要内容，成功时为大模型的回复，失败时为错误信息
+        :param heu_result   : (dict) 启发式规则请求结果
+        :param status       : (bool) 是否成功
         """
+        self.heu_result = heu_result
         self.content = content
         self.status = status
 
@@ -27,7 +29,8 @@ class LlmResponseJson:
         """
         response = {
             "status": self.status,
-            "content": self.content
+            "content": self.content,
+            "heu_result": self.heu_result
         }
         return response
 

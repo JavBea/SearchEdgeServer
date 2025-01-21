@@ -9,13 +9,13 @@ from src.utils.heu_kits.peerexaminee_methods import extract_bool
 
 
 # 同伴策略
-def peer_examinee_strategy(former_query: str, former_content: str, examinee_llm: int, former_messages=None):
+def peer_examinee_strategy(former_query: str, former_content: str, examinee_llm: str, former_messages=None):
     """
     同伴策略来判断大模型是否陷入幻觉。
     同伴策略用到两个大模型，一个作为examinee，即待测者，另一个作为examiner，即检验者。
     :param former_query     : (str)之前请求的内容
     :param former_content   : (str)之前的回复
-    :param examinee_llm     : (int)待测的大模型
+    :param examinee_llm     : (str)待测的大模型
     :param former_messages  : (list)之前的上下文环境
     :return                 : (int)可信度
     """
@@ -33,7 +33,7 @@ def peer_examinee_strategy(former_query: str, former_content: str, examinee_llm:
     print("query:\n"+query)
 
     # 选取合适的examiner LLM
-    if examinee_llm == LLM.CHATGPT.value:
+    if examinee_llm == LLM.CHATGPT.value["series_name"]:
         # 如果examinee为ChatGPT就选QWEN作examiner
         result = llm_query_service(query=query, llm=LLM.QWEN.value, messages=former_messages, func_on=False)
     else:

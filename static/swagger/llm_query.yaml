@@ -38,7 +38,7 @@ parameters:
         heu_list:
           type: object
           description: 启发式规则策略列表.
-          example: []
+          example: {"SIMPLEJUDGE":true,"MULTIQUERY":false,"FUNCTIONCALL":true,"PEEREXAMINEE":true}
 responses:
   200:
     description: Successful processing of the request
@@ -51,6 +51,9 @@ responses:
         status:
           type: boolean
           description: 响应有效性
+        heu_result:
+          type: object
+          description: 启发式规则评测结果
     examples:
-      application/json: { "content": "I'm your baba", "status": true }
+      application/json: { "content": "I'm your baba", "status": true, "heu_result":{...} }
 

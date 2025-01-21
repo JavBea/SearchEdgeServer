@@ -8,6 +8,7 @@ from flask import request
 import flask
 
 from src.services import llmService
+from src.services import heuService
 from src.utils.json_generator.llm_response_json import LlmResponseJson
 
 # 实例化蓝图对象“llm_bp”
@@ -25,13 +26,28 @@ def query_route():
     # 获取请求的各个字段
     query = data['query']
     func_on = data['func_on']
-    # heu_on = data['heu_on']
+    heu_on = data['heu_on']
     llm = data['llm']
     model = data['model']
 
     # 获得请求内容
     response_message_content = llmService.llm_query_service(query, llm=llm, model=model, func_on=func_on)
-    res = LlmResponseJson(response_message_content, True)
+
+    # 如果打开启发式规则就获取请求的启发式规则策略列表，否则置None
+    heu_list = data.get('heu_list', None) if heu_on else None
+
+    # 获取评分结果
+    heu_result = heuService.illusion_judge(
+        heu_list=heu_list,
+        content=response_message_content,
+        query=query,
+        llm=llm,
+        model=model,
+    )
+
+    # 生成响应实例
+    res = LlmResponseJson(content=response_message_content, heu_result=heu_result,status=True)
+
     return res.to_json()
 
 

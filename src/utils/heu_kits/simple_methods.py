@@ -154,6 +154,7 @@ def extract_and_validate_equations(text):
     """
     # 首先提取等式
     equations = __extract_equations__(text)
+
     # 正确的等式
     valid_equations = []
     # 错误的等式
