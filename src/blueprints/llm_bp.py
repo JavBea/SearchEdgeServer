@@ -29,6 +29,7 @@ def query_route():
           required:
             - query
             - func_on
+            - heu_on
             - llm
             - model
           properties:
@@ -37,6 +38,10 @@ def query_route():
               description: 请求的内容.
               example: "Who are you?"
             func_on:
+              type: boolean
+              description: 开启函数调用？
+              example: true
+            heu_on:
               type: boolean
               description: 开启函数调用？
               example: true
