@@ -77,18 +77,17 @@ def llm_single_model_multi_query_service(query, llm, model, messages=None, func_
     times = TIMES_ARGUMENT
 
     result = []
-    temp = None
 
-    if llm == LLM.CHATGPT.value["series_name"]:
+    if llm == LLM.QWEN.value["series_name"]:
+        while not times == 0:
+            times -= 1
+            temp = qwen_query(query, model=model, messages=messages, functions=qwen_functions, func_on=func_on)
+            result.append(temp)
+
+    else:
         while not times == 0:
             times -= 1
             temp = gpt_query(query, model=model, messages=messages, functions=gpt_functions, func_on=func_on)
-            result.append(temp)
-
-    elif llm == LLM.QWEN.value["series_name"]:
-        while not times == 0:
-            times -= 1
-            qwen_query(query, model=model, messages=messages, functions=gpt_functions, func_on=func_on)
             result.append(temp)
 
     return result
@@ -96,10 +95,19 @@ def llm_single_model_multi_query_service(query, llm, model, messages=None, func_
 
 if __name__ == '__main__':
     llm_client_init()
-    from src.services.heuServices.peerexaminee_strategy import peer_examinee_strategy
+    # from src.services.heuServices.peerexaminee_strategy import peer_examinee_strategy
+    #
+    # res2 = peer_examinee_strategy(former_query="Who is Albert Einstein",
+    #                               former_content="He is a cat",
+    #                               examinee_llm=LLM.QWEN.value['series_name'],
+    #                               former_messages=None)
+    #
+    # print(res2)
+    from src.services.heuServices.multiquery_strategy import multi_query_strategy
 
-    res2 = peer_examinee_strategy(former_query="Who is Albert Einstein",
-                                  former_content="He is a cat",
-                                  examinee_llm=3,
-                                  former_messages=None)
-    print(res2)
+    res3 = multi_query_strategy(
+        query="Who is Albert Einstein",
+        content="He is a cat",
+    )
+    print(res3)
+

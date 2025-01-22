@@ -23,6 +23,9 @@ def bert_similarity(reference, candidate):
 
     # 计算余弦相似度
     similarity = util.pytorch_cos_sim(reference_embedding, candidate_embedding).item()
+
+    # 转为百分制
+    similarity *= 100
     print(f"Sentence-BERT Semantic Similarity: {similarity}")
 
     return similarity

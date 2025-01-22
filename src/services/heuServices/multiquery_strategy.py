@@ -70,6 +70,10 @@ def multi_query_strategy(query: str, content: str, messages=None, func_on=False,
         from src.config.constants import BERT_ARGUMEMT
         similarity_average *= BERT_ARGUMEMT
 
+    # 防止分数溢出
+    if similarity_average > 100:
+        similarity_average = 100
+
     return similarity_average
 
 

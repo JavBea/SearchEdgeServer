@@ -179,13 +179,13 @@ def validate_year_and_month(refernce, candidate):
     :return: (int) 评测的分数
     """
 
-    # 如果参考文本中压根没有年月份
-    if len(refernce) == 0:
-        return 100
-
     # 提取年月份
     ym_set1 = __extract_year_and_month__(refernce)
     ym_set2 = __extract_year_and_month__(candidate)
+
+    # 如果某个文本中压根没有年月份
+    if len(ym_set1) == 0 or len(ym_set2) == 0:
+        return 100
 
     # 计算分数
     score = __yearmonth_evaluate__(ym_set1, ym_set2)
