@@ -5,6 +5,7 @@
 # @Author    :Shao YiHan
 from src.config.llms import LLM
 from src.config.searchs import SearchStrategy
+from src.config.constants import EQUATIONVALIDATE_WEIGHT,TIMECHECK_WEIGHT,KNOWLEDGECHECK_WEIGHT
 
 from src.utils.heu_kits.simple_methods import extract_and_validate_equations
 from src.utils.heu_kits.simple_methods import validate_year_and_month
@@ -53,8 +54,11 @@ def simple_judge_strategy(llm: str, content: str, query: str):
         args3 -= 50 if search_pattern(content,"last update") else 0
         args3 -= 30 if search_pattern(content,"无法预测") else 0
 
-    # 返回平均分
-    return (args1+args2+args3)/3
+    # 权重和
+    weight_sum = EQUATIONVALIDATE_WEIGHT+TIMECHECK_WEIGHT+KNOWLEDGECHECK_WEIGHT
+
+    # 返回加权后的平均分
+    return (args1*EQUATIONVALIDATE_WEIGHT+args2*TIMECHECK_WEIGHT+args3*KNOWLEDGECHECK_WEIGHT)/weight_sum
 
 
 if __name__ == '__main__':
