@@ -10,6 +10,7 @@ import flask
 from src.services import llmService
 from src.services import heuService
 from src.utils.json_generator.llm_response_json import LlmResponseJson
+from src.dao.MessageDao import MessageDao
 
 # 实例化蓝图对象“llm_bp”
 llm_bp = flask.Blueprint('llm_module', __name__)
@@ -29,9 +30,24 @@ def query_route():
     heu_on = data['heu_on']
     llm = data['llm']
     model = data['model']
+    conversation_id = data['conversation_id']
+
+    # 将用户发送的请求写入数据库
+    MessageDao.create_message(
+        conversation_id=conversation_id,
+        sender='user',
+        message_content=query,
+    )
 
     # 获得请求内容
     response_message_content = llmService.llm_query_service(query, llm=llm, model=model, func_on=func_on)
+
+    # 将大模型响应结果写入数据库
+    MessageDao.create_message(
+        conversation_id=conversation_id,
+        sender='system',
+        message_content=response_message_content,
+    )
 
     # 如果打开启发式规则就获取请求的启发式规则策略列表，否则置None
     heu_list = data.get('heu_list', None) if heu_on else None

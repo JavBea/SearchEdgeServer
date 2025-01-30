@@ -81,6 +81,7 @@ def __validate_equation__(equation):
     # 以'='为分隔符分开左侧和右侧
     if '=' in equation:
         left, right = equation.split('=')
+
         try:
             # 计算左右两边表达式的结果
             left_result = eval(left.strip())
@@ -176,7 +177,7 @@ def validate_year_and_month(refernce, candidate):
     提取并验证两个文本中的年月份
     :param refernce : (str) 作为参考的文本
     :param candidate: (str) 待测文本
-    :return: (int) 评测的分数
+    :return         : (int) 评测的分数
     """
 
     # 提取年月份
