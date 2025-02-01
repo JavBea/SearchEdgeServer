@@ -4,7 +4,7 @@
 # @Time      :2025/1/8 15:37
 # @Author    :Shao YiHan
 
-# 供‘ChatGPT’大模型的函数信息
+# 供‘ChatGPT’大模型的函数说明
 gpt_functions = [
     {
         "name": "google_search",
@@ -27,8 +27,8 @@ gpt_functions = [
     }
 ]
 
-# 供‘通义千问’大模型的函数信息
-qwen_functions = [
+# 供‘DeepSeek’、‘通义千问’大模型的函数说明
+deepseek_qwen_functions = [
     {
         "type": "function",
         "function": {

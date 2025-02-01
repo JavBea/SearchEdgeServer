@@ -8,13 +8,15 @@ from openai import OpenAI
 
 from src.services.llmServices.gptService import query_service as gpt_query
 from src.services.llmServices.qwenService import query_service as qwen_query
+from src.services.llmServices.deepseekService import query_service as deepseek_query
 from src.config.llms import LLM
 from src.config.functions import gpt_functions
-from src.config.functions import qwen_functions
+from src.config.functions import deepseek_qwen_functions
 
 
 def llm_query_service(query, llm=LLM.CHATGPT.value["series_name"], model=None, messages=None, func_on=True):
     """
+
     选择不同系列的大模型、具体模型，在上下文环境和函数说明下，对请求返回结果
     :param query    : (str)  请求的问题
     :param llm      : (str)  请求的大模型系列；默认为 chatgpt
@@ -26,7 +28,9 @@ def llm_query_service(query, llm=LLM.CHATGPT.value["series_name"], model=None, m
 
     # 选择大模型，并调用相关函数
     if llm == LLM.QWEN.value["series_name"]:
-        return qwen_query(query, model, messages, qwen_functions, func_on)
+        return qwen_query(query, model, messages, deepseek_qwen_functions, func_on)
+    elif llm == LLM.DEEPSEEK.value["series_name"]:
+        return deepseek_query(query, model, messages, deepseek_qwen_functions, func_on)
     else:
         return gpt_query(query, model, messages, gpt_functions, func_on)
 
@@ -58,7 +62,8 @@ def llm_multi_query_service(query, messages=None, func_on=True):
     :return         : (dict) 返回各个模型的回答
     """
     result = {"chatgpt": gpt_query(query, model=None, messages=messages, functions=gpt_functions, func_on=func_on),
-              "qwen": qwen_query(query, model=None, messages=messages, functions=qwen_functions, func_on=func_on)}
+              "qwen": qwen_query(query, model=None, messages=messages, functions=deepseek_qwen_functions, func_on=func_on),
+              "deepseek": deepseek_query(query, model=None, messages=messages, functions=deepseek_qwen_functions, func_on=func_on)}
     return result
 
 
@@ -81,7 +86,13 @@ def llm_single_model_multi_query_service(query, llm, model, messages=None, func_
     if llm == LLM.QWEN.value["series_name"]:
         while not times == 0:
             times -= 1
-            temp = qwen_query(query, model=model, messages=messages, functions=qwen_functions, func_on=func_on)
+            temp = qwen_query(query, model=model, messages=messages, functions=deepseek_qwen_functions, func_on=func_on)
+            result.append(temp)
+
+    elif llm == LLM.DEEPSEEK.value["series_name"]:
+        while not times == 0:
+            times -= 1
+            temp = deepseek_query(query, model=model, messages=messages, functions=deepseek_qwen_functions, func_on=func_on)
             result.append(temp)
 
     else:

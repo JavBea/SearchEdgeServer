@@ -39,7 +39,7 @@ def query_route():
         message_content=query,
     )
 
-    # 获得请求内容
+    # 获得大模型响应结果
     response_message_content = llmService.llm_query_service(query, llm=llm, model=model, func_on=func_on)
 
     # 将大模型响应结果写入数据库

@@ -21,6 +21,11 @@ class LLM(Enum):
         "model1": "qwen-plus",
         "model2": "qwen-4"
     }
+    DEEPSEEK = {
+        "series_name": "deepseek",
+        "model1": "deepseek-r1:7b",
+        "model2": "deepseek-r1:32b"
+    }
 
 
 if __name__ == '__main__':
