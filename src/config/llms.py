@@ -24,7 +24,8 @@ class LLM(Enum):
     DEEPSEEK = {
         "series_name": "deepseek",
         "model1": "deepseek-r1:7b",
-        "model2": "deepseek-r1:32b"
+        "model2": "deepseek-r1:32b",
+        "model3": "deepseek-v3",
     }
 
 

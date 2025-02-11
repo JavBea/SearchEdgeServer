@@ -47,6 +47,7 @@ class ApiDao:
         from src.config import apis
         apis.GPT_API = ApiDao.get_api_by_name('chatgpt').api_key
         apis.QWEN_API = ApiDao.get_api_by_name('qwen').api_key
+        apis.XIAOAI_API = ApiDao.get_api_by_name('xiaoai').api_key
         apis.GOOGLE_CSE_API = ApiDao.get_api_by_name('google').api_key
         apis.GOOGLE_CSE_CX = ApiDao.get_api_by_name('google').other
 

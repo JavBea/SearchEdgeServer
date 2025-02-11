@@ -9,6 +9,7 @@ import ollama
 
 from src.config.llms import LLM
 from src.services.searchServices.googleService import google_search
+client = None
 
 
 def query_service(query, model=LLM.DEEPSEEK.value["model1"], messages=None, functions=None, func_on=True):
@@ -18,7 +19,7 @@ def query_service(query, model=LLM.DEEPSEEK.value["model1"], messages=None, func
     :param model    :(str) 请求建成的模型实例；默认为 "deepseek-r1:7b"
     :param messages :(dict) 上下文环境；默认为 None，此时自动生成简单的上下文环境
     :param functions:(dict) 可调用的函数说明；默认为 None
-    :param func_on  :(bool) 是否开启函数调用；默认为 True,即开启
+    :param func_on  :(bool) ###DeepSeek目前模型不支持function-calling### 是否开启函数调用；默认为 True,即开启
     :return : (str) 得到的String格式回复
     """
 
@@ -82,7 +83,7 @@ def __single_request(query, model=LLM.DEEPSEEK.value["model1"], messages=None, f
     :param query    :(str) 请求的问题
     :param model    :(str) 请求建成的模型实例；默认为"deepseek-r1:7b"
     :param messages :(dict) 上下文环境；默认为None，此时自动生成简单的上下文环境
-    :param functions:(dict) 可调用的函数说明；默认为None
+    :param functions:(dict) ###DeepSeek目前模型不支持function-calling### 可调用的函数说明；默认为None
     :return : (dict) 得到的JSON格式回复
     """
 
@@ -91,10 +92,17 @@ def __single_request(query, model=LLM.DEEPSEEK.value["model1"], messages=None, f
         messages = [{"role": "user", "content": query}]
 
     # 获取response
-    response = ollama.chat(model=model, stream=False, messages=messages, options={"temperature": 0})
-
-    # 获取响应中的回复字段
-    response_message = response.message
+    if model == LLM.DEEPSEEK.value["model3"]:
+        response = client.chat.completions.create(
+            model=model,
+            messages=messages,
+            functions=functions
+        )
+        response_message = response.model_dump()["choices"][0]["message"]
+    else:
+        response = ollama.chat(model=model, stream=False, messages=messages, options={"temperature": 0})
+        # 获取响应中的回复字段
+        response_message = response.message
 
     # 返回结果
     return response_message

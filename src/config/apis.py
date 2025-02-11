@@ -6,6 +6,7 @@
 
 GPT_API = None
 QWEN_API = None
+XIAOAI_API = None
 GOOGLE_CSE_API = None
 GOOGLE_CSE_CX = None
 

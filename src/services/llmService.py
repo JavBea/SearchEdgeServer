@@ -43,11 +43,16 @@ def llm_client_init():
 
     from src.services.llmServices import gptService
     from src.services.llmServices import qwenService
+    from src.services.llmServices import deepseekService
     from src.config import apis
     gptService.client = OpenAI(api_key=apis.GPT_API)
     qwenService.client = OpenAI(
         api_key=apis.QWEN_API,
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+    )
+    deepseekService.client = OpenAI(
+        api_key=apis.XIAOAI_API,
+        base_url='https://xiaoai.plus/v1'
     )
 
     return True
